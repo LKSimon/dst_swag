@@ -1,0 +1,142 @@
+basePath: /
+definitions:
+  code.Failure:
+    properties:
+      code:
+        description: 业务码
+        type: integer
+      message:
+        description: 描述信息
+        type: string
+    type: object
+  video.createAsyncRequest:
+    type: object
+  video.createAsyncResponse:
+    type: object
+  video.createSyncRequest:
+    type: object
+  video.createSyncResponse:
+    type: object
+  video.taskListRequest:
+    type: object
+  video.taskListResponse:
+    type: object
+  video.templateListRequest:
+    type: object
+  video.templateListResponse:
+    type: object
+info:
+  contact: {}
+  title: swagger 接口文档
+  version: "2.0"
+paths:
+  /api/video/createAsync:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 合成素材(异步)
+      parameters:
+      - description: 请求信息
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/video.createAsyncRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/video.createAsyncResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/code.Failure'
+      summary: 合成素材(异步)
+      tags:
+      - API.video
+  /api/video/createSync:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 合成素材(同步)
+      parameters:
+      - description: 请求信息
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/video.createSyncRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/video.createSyncResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/code.Failure'
+      summary: 合成素材(同步)
+      tags:
+      - API.video
+  /api/video/task:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 查询视频合成结果接口
+      parameters:
+      - description: 请求信息
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/video.taskListRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/video.taskListResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/code.Failure'
+      summary: 查询视频合成结果接口
+      tags:
+      - API.video
+  /api/video/template:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 视频模板列表接口
+      parameters:
+      - description: 请求信息
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/video.templateListRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/video.templateListResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/code.Failure'
+      summary: 视频模板列表接口
+      tags:
+      - API.video
+securityDefinitions:
+  LoginToken:
+    in: header
+    name: token
+    type: apiKey
+swagger: "2.0"
