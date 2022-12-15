@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 	"unicode"
 
@@ -25,10 +26,15 @@ func init() {
 
 func main() {
 	fs := token.NewFileSet()
-	filePath := fmt.Sprintf("./internal/api/%s", handlerName)
-	parsedFile, err := decorator.ParseFile(fs, filePath+"/handler.go", nil, 0)
+	// filePath := fmt.Sprintf("./internal/api/%s", handlerName)
+	dir, _ := os.Getwd()
+	filePath := filepath.Join(dir, "internal", "api", handlerName)
+	// parsedFile, err := decorator.ParseFile(fs, filePath+"/handler.go", nil, 0)
+	fileName := filepath.Join(filePath,"handler.go")
+	parsedFile, err := decorator.ParseFile(fs, fileName, nil, 0)
 	if err != nil {
-		log.Fatalf("parsing package: %s: %s\n", filePath, err)
+		//log.Fatalf("parsing package: %s: %s\n", filePath, err)
+		fmt.Println("err: ",err)
 	}
 
 	files, _ := ioutil.ReadDir(filePath)
@@ -59,8 +65,9 @@ func main() {
 						continue
 					}
 
-					filepath := "./internal/api/" + handlerName
-					filename := fmt.Sprintf("%s/func_%s.go", filepath, strings.ToLower(v.Names[0].String()))
+					//filepath := filepath.Join(dir,"internal","api" , handlerName)
+					fileDir := filepath.Join(dir, "internal", "api", handlerName)
+					filename := filepath.Join(fileDir,fmt.Sprintf("func_%s.go", strings.ToLower(v.Names[0].String())))
 					funcFile, err := os.OpenFile(filename, os.O_CREATE|os.O_TRUNC|os.O_RDWR, 0766)
 					if err != nil {
 						fmt.Printf("create and open func file error %v\n", err.Error())
@@ -76,7 +83,7 @@ func main() {
 
 					funcContent := fmt.Sprintf("package %s\n\n", handlerName)
 					funcContent += "import (\n"
-					funcContent += `"dst_swag_demo/internal/pkg/core"`
+					funcContent += `"dst_swag/internal/pkg/core"`
 					funcContent += "\n)\n\n"
 					funcContent += fmt.Sprintf("\n\ntype %sRequest struct {}\n\n", Lcfirst(v.Names[0].String()))
 					funcContent += fmt.Sprintf("type %sResponse struct {}\n\n", Lcfirst(v.Names[0].String()))

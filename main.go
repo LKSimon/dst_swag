@@ -1,11 +1,13 @@
 package main
 
 import (
-	"dst_swag_demo/docs"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"net/http"
+
+	"dst_swag/docs"
 )
 
 // @BasePath /api/v1

@@ -1,8 +1,8 @@
 package video
 
 import (
-	"dst_swag_demo/internal/pkg/core"
-	"dst_swag_demo/internal/service/video"
+	"dst_swag/internal/pkg/core"
+	"dst_swag/internal/service/video"
 	"go.uber.org/zap"
 )
 

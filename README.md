@@ -1,6 +1,9 @@
 ## 生成 handler
 
-先写好接口，比如创建 internal/api/video/handler.go，参考其他目录的写法 然后运行命令生成对应 handler，再补充 handler/
+- 先写好接口，比如创建 internal/api/video/handler.go，接口中需加相应的注解；
+- 在service下创建video目录，并定义该service方法
+
+参考其他目录的写法 然后运行命令生成对应 handler，再补充 handler/
 
 ```
 go run -v ./cmd/handlergen/main.go -handler video

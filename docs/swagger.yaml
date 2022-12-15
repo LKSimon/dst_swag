@@ -1,4 +1,4 @@
-basePath: /
+basePath: /api/v1
 definitions:
   code.Failure:
     properties:
@@ -8,6 +8,22 @@ definitions:
       message:
         description: 描述信息
         type: string
+    type: object
+  img.createAsyncRequest:
+    type: object
+  img.createAsyncResponse:
+    type: object
+  img.createSyncRequest:
+    type: object
+  img.createSyncResponse:
+    type: object
+  img.taskListRequest:
+    type: object
+  img.taskListResponse:
+    type: object
+  img.templateListRequest:
+    type: object
+  img.templateListResponse:
     type: object
   video.createAsyncRequest:
     type: object
@@ -27,9 +43,111 @@ definitions:
     type: object
 info:
   contact: {}
-  title: swagger 接口文档
-  version: "2.0"
 paths:
+  /api/img/createAsync:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 合成素材(异步)
+      parameters:
+      - description: 请求信息
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/img.createAsyncRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/img.createAsyncResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/code.Failure'
+      summary: 合成素材(异步)
+      tags:
+      - API.img
+  /api/img/createSync:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 合成素材(同步)
+      parameters:
+      - description: 请求信息
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/img.createSyncRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/img.createSyncResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/code.Failure'
+      summary: 合成素材(同步)
+      tags:
+      - API.img
+  /api/img/task:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 查询视频合成结果接口
+      parameters:
+      - description: 请求信息
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/img.taskListRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/img.taskListResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/code.Failure'
+      summary: 查询视频合成结果接口
+      tags:
+      - API.img
+  /api/img/template:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 视频模板列表接口
+      parameters:
+      - description: 请求信息
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/img.templateListRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/img.templateListResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/code.Failure'
+      summary: 视频模板列表接口
+      tags:
+      - API.img
   /api/video/createAsync:
     post:
       consumes:
@@ -134,9 +252,19 @@ paths:
       summary: 视频模板列表接口
       tags:
       - API.video
-securityDefinitions:
-  LoginToken:
-    in: header
-    name: token
-    type: apiKey
+  /example/helloworld:
+    get:
+      consumes:
+      - application/json
+      description: do ping
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: ping example
+      tags:
+      - example
 swagger: "2.0"

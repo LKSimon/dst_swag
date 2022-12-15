@@ -2,7 +2,7 @@ package video
 
 import (
 	"context"
-	"dst_swag_demo/internal/pkg/core"
+	"dst_swag/internal/pkg/core"
 )
 
 type templateListRequest struct{}

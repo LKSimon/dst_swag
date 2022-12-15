@@ -1,6 +1,6 @@
-module dst_swag_demo
+module dst_swag
 
-go 1.18
+go 1.17
 
 require (
 	github.com/dave/dst v0.27.0
